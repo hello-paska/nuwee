@@ -1,0 +1,54 @@
+<div class="container-fluid" style="min-height: 50vh">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="text-primary">Кафедри</h1>
+
+            {{#if isAdmin}}
+            <div class="text-right">
+                <a href="/create" class="btn btn-primary btn-sm my-2">Додати запис </a>
+            </div>
+            {{/if}}
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                        <tr class="text-dark table-primary">
+                            {{#if isAdmin}}
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            {{/if}}
+                            <th scope="col">Код кафедри</th>
+                            <th scope="col">Назва</th>
+                            <th scope="col">Розташування</th>
+                        </tr>
+                        {{#each kafedry}} <!-- початок циклу для динамічного додавання рядків -->
+                        <tr class="text-dark">
+                            {{#if ../isAdmin}}
+                            <td>
+                                <!-- За методом POST:-->
+                                <form action="delete/{{this.id_kafedry}}" method="POST" style="display:inline;">
+                                    <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                    <input type="submit" value="Видалити" class="btn btn-warning btn-sm"/>
+                                </form>
+                            </td>
+                            <td>
+                                <a href="/edit/{{this.id_kafedry}}" class="btn bg-success btn-sm">Редагувати</a>
+                            </td>
+                            {{/if}}
+                            <td>
+                                {{this.id_kafedry}}
+                            </td>
+                            <td>
+                                {{this.nazva_kafedry}}
+                            </td>
+                            <td>
+                                {{this.roztashuvannya}}
+                            </td>
+                        </tr>
+                        {{/each}} <!-- кінець циклу для динамічного додавання рядків -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

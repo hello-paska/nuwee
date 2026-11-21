@@ -1,0 +1,43 @@
+<div class="container" style="min-height: 50vh">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 text-center mx-auto">
+            <h2 class="text-primary">Співробітники
+            &#8220;{{spivrobitnyky.prizvyshche}}&#8221;
+            <br>(редагування)
+            </h2>
+            <form method="post" action="/spivrobitnyky_edit">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}" id="csrfToken">
+                <div class="form-group">
+                    <label for="id_kafedry">Кафедра</label>
+                    <input list="id" class="form-control" name="id_kafedry" placeholder="Виберіть кафедру"
+                    autocomplete="off" value="{{spivrobitnyky.id_kafedry}}">
+                    <datalist id="id">
+                        {{#each kafedry}}
+                        <option value="{{this.id_kafedry}}">
+                        {{this.nazva_kafedry}}
+                        </option>
+                        {{/each}}
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="prizvyshche">Прізвище</label>
+                    <input type="text" class="form-control" name="prizvyshche" placeholder="Вкажіть прізвище"
+                    value="{{spivrobitnyky.prizvyshche}}">
+                </div>
+                <div class="form-group">
+                    <label for="imya">Ім'я</label>
+                    <input type="text" class="form-control" name="imya" placeholder="Вкажіть ім'я"
+                    value="{{spivrobitnyky.imya}}">
+                </div>
+                <div class="form-group">
+                    <label for="pobatkovi">По-батькові</label>
+                    <input type="text" class="form-control" name="pobatkovi" placeholder="Введіть по-батькові"
+                    value="{{spivrobitnyky.pobatkovi}}">
+                </div>
+                <input type="hidden" name="id_spivrobitnyky" value="{{spivrobitnyky.id_spivrobitnyky}}" />
+                <button type="submit" class="btn btn-primary mx-2 my-2">Зберегти</button>
+                <button type="reset" class="btn btn-primary">Очистити</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="container" style="min-height: 50vh">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 text-center mx-auto">
+            <h2 class="text-primary">Кафедра
+                &#8220;{{kafedry.nazva_kafedry}}&#8221;
+                <br>(редагування)
+            </h2>
+            <form action="/edit" method="post">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}" id="csrfToken">
+                <input type="hidden" name="id_kafedry" value="{{kafedry.id_kafedry}}" />
+                <div class="form-group">
+                    <label for="nazva_kafedry">Назва кафедри</label>
+                    <input type="text" class="form-control" name="nazva_kafedry" placeholder="Введіть назву кафедри"
+                    value = "{{kafedry.nazva_kafedry}}">
+                </div>
+                <div class="form-group">
+                    <label for="roztashuvannya">Розташування</label>
+                    <input type="text" class="form-control" name="roztashuvannya" placeholder="Введіть розташування кафедри"
+                    value = "{{kafedry.roztashuvannya}}">
+                </div>
+                <button type="submit" class="btn btn-primary mx-2 my-2">Зберегти</button>
+                <button type="reset" class="btn btn-primary">Очистити</button>
+            </form>
+        </div>
+    </div>
+</div>

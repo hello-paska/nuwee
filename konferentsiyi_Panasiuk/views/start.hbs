@@ -1,0 +1,52 @@
+<div class="container-fluid" style="min-height: 50vh">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 text-center mx-auto">
+            <h4 class="text-primary">Авторизація</h4>
+            <form name="login">
+                <input type="hidden" id="csrfToken" name="_csrf" value="{{csrfToken}}">
+                <div class="form-group">
+                    <label for="name_user">Логін (E_mail):</label>
+                    <input type="email" class="form-control" id="name_user" name="username" placeholder="Введіть логін">
+                </div>
+                <div class="form-group">
+                    <label for="parol">Пароль:</label>
+                    <input type="password" class="form-control" id="parol" name="password" placeholder="Введіть пароль">
+                </div>
+                <input type="button" id="btn" class="btn btn-primary mx-2 my-2" value="Зберегти"/>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+window.onload = function () {
+    var btn = document.getElementById('btn');
+    var csrfToken = document.getElementById('csrfToken').value;
+
+    btn.addEventListener('click', function () {
+        var username = document.querySelector('input[name="username"]').value;
+        var password = document.querySelector('input[name="password"]').value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/login');
+
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('csrf-token', csrfToken);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                location.href = '/kafedry';
+            } else {
+                alert('Помилка авторизації: ' + xhr.responseText);
+            }
+        };
+
+        xhr.send(JSON.stringify({
+            username: username,
+            password: password
+        }));
+    });
+};
+</script>

@@ -6,11 +6,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Створюємо каталог "PIB"
-fs.mkdir(path.join(__dirname, 'PIB'), { recursive: true }, (err) => {
+// Створюємо каталог "Panasiuk"
+fs.mkdir(path.join(__dirname, 'Panasiuk'), { recursive: true }, (err) => {
     if (err) {
         console.error('Помилка при створенні каталогу:', err);
         return;
     }
-    console.log('Каталог "PIB" створено або вже існує');
+    console.log('Каталог "Panasiuk" створено або вже існує');
 });

@@ -5,8 +5,8 @@ console.log('NUWM');
 console.log(s1.blue('NUWM')); // виводить синім кольором в консоль
 console.log(s1.rgb(34, 208, 95)('NUWM'));
 
-// Прізвище (п. 19) — замініть на своє
-const surname = 'Прізвище';
+// Прізвище (п. 19)
+const surname = 'Панасюк Михайло';
 console.log(s1.magenta.bold(surname));
 
 console.log(s1.blue(s2)); // буде НУВГП

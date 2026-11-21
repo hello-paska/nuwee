@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Шлях до файлу
-const filePath = path.join(__dirname, 'PIB', 'text.txt');
+const filePath = path.join(__dirname, 'Panasiuk', 'text.txt');
 console.log('Повний шлях до файлу:', filePath);
 
 // Створення файлу (або перезапис, якщо існує)

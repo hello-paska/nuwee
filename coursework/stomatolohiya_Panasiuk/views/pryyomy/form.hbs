@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+<div class="col-md-8 col-lg-6">
+    <h2 class="text-primary text-center">Прийом<br><small>({{title}})</small></h2>
+    <form method="post" action="{{action}}">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="form-group">
+            <label for="id_patsiyenta">Пацієнт</label>
+            <select class="form-control" id="id_patsiyenta" name="id_patsiyenta" required>
+                <option value="">— виберіть —</option>
+                {{#each patsiyenty}}<option value="{{id_patsiyenta}}" {{#if (eq id_patsiyenta @root.r.id_patsiyenta)}}selected{{/if}}>{{nazva}}</option>{{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_likarya">Лікар</label>
+            <select class="form-control" id="id_likarya" name="id_likarya" required>
+                <option value="">— виберіть —</option>
+                {{#each likari}}<option value="{{id_likarya}}" data-v="{{id_viddilennya}}" {{#if (eq id_likarya @root.r.id_likarya)}}selected{{/if}}>{{nazva}}</option>{{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_poslugy">Послуга</label>
+            <select class="form-control" id="id_poslugy" name="id_poslugy" required>
+                <option value="">— виберіть —</option>
+                {{#each poslugy}}<option value="{{id_poslugy}}" data-v="{{id_viddilennya}}" {{#if (eq id_poslugy @root.r.id_poslugy)}}selected{{/if}}>{{nazva}}</option>{{/each}}
+            </select>
+            <small class="form-text text-muted">Показуються послуги відділення вибраного лікаря.</small>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6"><label for="data_pryyomu">Дата</label><input type="date" class="form-control" id="data_pryyomu" name="data_pryyomu" value="{{r.data_pryyomu}}" required></div>
+            <div class="form-group col-md-6"><label for="chas_pryyomu">Час</label><input type="time" class="form-control" id="chas_pryyomu" name="chas_pryyomu" value="{{r.chas_pryyomu}}" min="08:00" max="20:00" step="900" required></div>
+        </div>
+        <div class="form-group"><label for="diahnoz">Діагноз / примітка</label><input type="text" class="form-control" id="diahnoz" name="diahnoz" value="{{r.diahnoz}}" maxlength="255"></div>
+        <div class="form-group">
+            <label for="status">Статус</label>
+            <select class="form-control" id="status" name="status">
+                {{#each statusy}}<option {{#if (eq this @root.r.status)}}selected{{/if}}>{{this}}</option>{{/each}}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a href="/pryyomy" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+</div>
+<script>
+// Фільтрація списку послуг за відділенням вибраного лікаря
+(function () {
+    var likar = document.getElementById('id_likarya'), posluga = document.getElementById('id_poslugy');
+    function filter() {
+        var opt = likar.options[likar.selectedIndex], v = opt ? opt.getAttribute('data-v') : null;
+        Array.prototype.forEach.call(posluga.options, function (o) {
+            var hide = v && o.value && o.getAttribute('data-v') !== v;
+            o.hidden = hide; o.disabled = hide;
+            if (hide && o.selected) posluga.value = '';
+        });
+    }
+    likar.addEventListener('change', filter);
+    filter();
+})();
+</script>

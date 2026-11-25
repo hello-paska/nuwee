@@ -1,0 +1,35 @@
+<h1 class="text-primary text-center">Лікарі</h1>
+<form method="get" action="/likari" class="form-inline justify-content-center mb-3">
+    <label class="mr-2" for="viddilennya">Відділення:</label>
+    <select class="form-control mr-2" id="viddilennya" name="viddilennya">
+        <option value="">усі відділення</option>
+        {{#each viddilennya}}
+        <option value="{{id_viddilennya}}" {{#if (eq id_viddilennya @root.vybrane)}}selected{{/if}}>{{nazva_viddilennya}}</option>
+        {{/each}}
+    </select>
+    <button type="submit" class="btn btn-primary">Показати</button>
+</form>
+{{#if isAdmin}}<div class="text-right mb-2"><a href="/likari/create?viddilennya={{vybrane}}" class="btn btn-primary btn-sm">Додати запис</a></div>{{/if}}
+<div class="row">
+{{#each likari}}
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+        <div class="card text-center h-100">
+            <div class="card-header small">{{nazva_viddilennya}}</div>
+            <div class="card-body">
+                <h5 class="card-title mb-1">{{prizvyshche}}</h5>
+                <p class="mb-1">{{imya}} {{pobatkovi}}</p>
+                <p class="text-muted small mb-1">{{spetsializatsiya}}</p>
+                <p class="small mb-0">{{telefon}} · прийомів: <b>{{pryyomiv}}</b></p>
+            </div>
+            {{#if @root.isAdmin}}
+            <div class="card-footer">
+                <a href="/likari/edit/{{id_likarya}}" class="btn btn-success btn-sm">Редагувати</a>
+                {{> delete action=(concat "/likari/delete/" id_likarya)}}
+            </div>
+            {{/if}}
+        </div>
+    </div>
+{{else}}
+    <div class="col-12 text-center text-muted">Лікарів не знайдено</div>
+{{/each}}
+</div>

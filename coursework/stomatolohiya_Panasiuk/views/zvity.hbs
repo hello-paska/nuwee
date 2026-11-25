@@ -1,0 +1,16 @@
+<h1 class="text-primary text-center">Звіти</h1>
+<div class="row justify-content-center">
+<div class="col-md-8 col-lg-6">
+    <form method="get" id="zvit" target="_blank" class="card p-3">
+        <div class="form-row">
+            <div class="form-group col-6"><label for="vid">Період з</label><input type="date" class="form-control" id="vid" name="vid" value="{{vid}}" required></div>
+            <div class="form-group col-6"><label for="do">по</label><input type="date" class="form-control" id="do" name="do" value="{{do}}" required></div>
+        </div>
+        <div class="list-group">
+            <button type="submit" formaction="/zvity/likari" class="list-group-item list-group-item-action"><b>Рейтинг лікарів</b><br><small>кількість прийомів і сума наданих послуг</small></button>
+            <button type="submit" formaction="/zvity/viddilennya" class="list-group-item list-group-item-action"><b>Виручка відділень</b><br><small>сума за завершеними прийомами та частка відділення</small></button>
+            <button type="submit" formaction="/zvity/poslugy" class="list-group-item list-group-item-action"><b>Найпопулярніші послуги</b><br><small>10 послуг, що надавались найчастіше</small></button>
+        </div>
+    </form>
+</div>
+</div>

@@ -1,0 +1,18 @@
+<div class="row justify-content-center">
+<div class="col-md-6">
+    <h2 class="text-primary text-center">Відділення<br><small>({{title}})</small></h2>
+    <form method="post" action="{{action}}">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="form-group">
+            <label for="nazva_viddilennya">Назва відділення</label>
+            <input type="text" class="form-control" id="nazva_viddilennya" name="nazva_viddilennya" value="{{v.nazva_viddilennya}}" required maxlength="100">
+        </div>
+        <div class="form-group">
+            <label for="roztashuvannya">Розташування</label>
+            <input type="text" class="form-control" id="roztashuvannya" name="roztashuvannya" value="{{v.roztashuvannya}}" maxlength="100" placeholder="Поверх, кабінети">
+        </div>
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a href="/viddilennya" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+</div>

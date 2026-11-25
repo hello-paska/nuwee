@@ -1,0 +1,19 @@
+<div class="row justify-content-center">
+<div class="col-md-6">
+    <h2 class="text-primary text-center">Пацієнт<br><small>({{title}})</small></h2>
+    <form method="post" action="{{action}}">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="form-row">
+            <div class="form-group col-md-4"><label for="prizvyshche">Прізвище</label><input type="text" class="form-control" id="prizvyshche" name="prizvyshche" value="{{p.prizvyshche}}" required></div>
+            <div class="form-group col-md-4"><label for="imya">Ім'я</label><input type="text" class="form-control" id="imya" name="imya" value="{{p.imya}}" required></div>
+            <div class="form-group col-md-4"><label for="pobatkovi">По батькові</label><input type="text" class="form-control" id="pobatkovi" name="pobatkovi" value="{{p.pobatkovi}}"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6"><label for="data_narodzhennya">Дата народження</label><input type="date" class="form-control" id="data_narodzhennya" name="data_narodzhennya" value="{{p.data_narodzhennya}}"></div>
+            <div class="form-group col-md-6"><label for="telefon">Телефон</label><input type="tel" class="form-control" id="telefon" name="telefon" value="{{p.telefon}}" placeholder="+380..."></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a href="/patsiyenty" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+</div>

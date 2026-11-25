@@ -1,0 +1,25 @@
+<h1 class="text-primary text-center">Послуги та ціни</h1>
+{{#if isAdmin}}<div class="text-right mb-2"><a href="/poslugy/create" class="btn btn-primary btn-sm">Додати послугу</a></div>{{/if}}
+<div class="row">
+{{#each grupy}}
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header font-weight-bold">{{nazva}} відділення</div>
+            <table class="table table-sm mb-0">
+            {{#each poslugy}}
+                <tr>
+                    <td>{{nazva_poslugy}}</td>
+                    <td class="text-right text-nowrap">{{money tsina}} грн</td>
+                    {{#if @root.isAdmin}}
+                    <td class="text-right text-nowrap">
+                        <a href="/poslugy/edit/{{id_poslugy}}" class="btn btn-success btn-sm">Ред.</a>
+                        {{> delete action=(concat "/poslugy/delete/" id_poslugy)}}
+                    </td>
+                    {{/if}}
+                </tr>
+            {{/each}}
+            </table>
+        </div>
+    </div>
+{{/each}}
+</div>

@@ -1,0 +1,33 @@
+<h1 class="text-primary text-center">Картка пацієнта</h1>
+<div class="card mb-3">
+    <div class="card-body">
+        <h4 class="card-title">{{p.prizvyshche}} {{p.imya}} {{p.pobatkovi}}</h4>
+        <p class="mb-1">Дата народження: <b>{{date p.data_narodzhennya}}</b> · Телефон: <b>{{p.telefon}}</b></p>
+        <p class="mb-0">Відвідувань: <b>{{pryyomy.length}}</b> · Сума наданих послуг: <b>{{money suma}} грн</b></p>
+    </div>
+    {{#if isAdmin}}
+    <div class="card-footer">
+        <a href="/pryyomy/create?patsiyent={{p.id_patsiyenta}}" class="btn btn-primary btn-sm">Записати на прийом</a>
+        <a href="/patsiyenty/edit/{{p.id_patsiyenta}}" class="btn btn-success btn-sm">Редагувати</a>
+        {{> delete action=(concat "/patsiyenty/delete/" p.id_patsiyenta)}}
+    </div>
+    {{/if}}
+</div>
+<h5>Історія прийомів</h5>
+<div class="table-responsive">
+<table class="table table-bordered table-sm bg-white">
+    <thead class="table-primary"><tr><th>Дата</th><th>Час</th><th>Лікар</th><th>Послуга</th><th>Діагноз</th><th>Статус</th><th class="text-right">Сума</th><th></th></tr></thead>
+    <tbody>
+    {{#each pryyomy}}
+        <tr>
+            <td>{{date data_pryyomu}}</td><td>{{time chas_pryyomu}}</td><td>{{likar}}</td><td>{{nazva_poslugy}}</td>
+            <td>{{diahnoz}}</td><td>{{status}}</td><td class="text-right">{{money tsina}}</td>
+            <td>{{#if (eq status "завершений")}}<a href="/pryyomy/kvytantsiya/{{id_pryyomu}}" target="_blank" class="btn btn-outline-primary btn-sm">Квитанція</a>{{/if}}</td>
+        </tr>
+    {{else}}
+        <tr><td colspan="8" class="text-center text-muted">Прийомів ще не було</td></tr>
+    {{/each}}
+    </tbody>
+</table>
+</div>
+<a href="/patsiyenty" class="btn btn-secondary">До списку пацієнтів</a>

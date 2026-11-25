@@ -1,0 +1,35 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow-sm">
+    <a class="navbar-brand" href="/"><img src="/favicon.ico" width="30" height="30" alt="Головна"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
+            aria-controls="menu" aria-expanded="false" aria-label="Меню">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav mr-auto">
+            {{#if isAuth}}
+            <li class="nav-item"><a class="nav-link" href="/pryyomy">Прийоми</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dovidnyky" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Довідники</a>
+                <div class="dropdown-menu" aria-labelledby="dovidnyky">
+                    <a class="dropdown-item" href="/viddilennya">Відділення</a>
+                    <a class="dropdown-item" href="/likari">Лікарі</a>
+                    <a class="dropdown-item" href="/patsiyenty">Пацієнти</a>
+                    <a class="dropdown-item" href="/poslugy">Послуги</a>
+                </div>
+            </li>
+            {{else}}
+            <li class="nav-item"><a class="nav-link" href="/poslugy">Послуги та ціни</a></li>
+            {{/if}}
+            {{#if isAdmin}}
+            <li class="nav-item"><a class="nav-link" href="/zvity">Звіти</a></li>
+            {{/if}}
+        </ul>
+        {{#if isAuth}}
+        <span class="navbar-text small mr-3">{{username}}{{#if isAdmin}} (адміністратор){{/if}}</span>
+        <a class="btn btn-outline-secondary btn-sm" href="/logout">Вихід</a>
+        {{else}}
+        <a class="btn btn-primary btn-sm" href="/#login">Вхід</a>
+        {{/if}}
+    </div>
+</nav>

@@ -1,0 +1,26 @@
+<h1 class="text-primary text-center">Відділення</h1>
+{{#if isAdmin}}<div class="text-right mb-2"><a href="/viddilennya/create" class="btn btn-primary btn-sm">Додати запис</a></div>{{/if}}
+<div class="table-responsive">
+<table class="table table-hover table-bordered bg-white">
+    <thead class="table-primary">
+        <tr><th>Код</th><th>Назва відділення</th><th>Розташування</th><th class="text-center">Лікарів</th><th class="text-center">Послуг</th>{{#if isAdmin}}<th></th>{{/if}}</tr>
+    </thead>
+    <tbody>
+    {{#each viddilennya}}
+        <tr>
+            <td>{{id_viddilennya}}</td>
+            <td><a href="/likari?viddilennya={{id_viddilennya}}">{{nazva_viddilennya}}</a></td>
+            <td>{{roztashuvannya}}</td>
+            <td class="text-center">{{likariv}}</td>
+            <td class="text-center">{{poslug}}</td>
+            {{#if @root.isAdmin}}
+            <td class="text-nowrap">
+                <a href="/viddilennya/edit/{{id_viddilennya}}" class="btn btn-success btn-sm">Редагувати</a>
+                {{> delete action=(concat "/viddilennya/delete/" id_viddilennya)}}
+            </td>
+            {{/if}}
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+</div>

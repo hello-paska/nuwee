@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6 mb-4">
+        <h4 class="text-primary">Про систему</h4>
+        <p>Система автоматизує облік роботи стоматологічної поліклініки: ведення довідників відділень,
+           лікарів, пацієнтів і послуг, запис пацієнтів на прийом, формування квитанцій та аналітичних звітів.</p>
+        <div class="row text-center">
+            <div class="col-6 col-md-3 mb-2"><div class="card p-2"><div class="h3 text-primary mb-0">{{stat.likari}}</div><small>лікарів</small></div></div>
+            <div class="col-6 col-md-3 mb-2"><div class="card p-2"><div class="h3 text-primary mb-0">{{stat.patsiyenty}}</div><small>пацієнтів</small></div></div>
+            <div class="col-6 col-md-3 mb-2"><div class="card p-2"><div class="h3 text-primary mb-0">{{stat.poslugy}}</div><small>послуг</small></div></div>
+            <div class="col-6 col-md-3 mb-2"><div class="card p-2"><div class="h3 text-primary mb-0">{{stat.zaplanovano}}</div><small>запланованих прийомів</small></div></div>
+        </div>
+    </div>
+    <div class="col-md-5 col-lg-3" id="login">
+        {{#if isAuth}}
+        <div class="card p-3 text-center">
+            <p class="mb-2">Ви увійшли як <b>{{username}}</b></p>
+            <a href="/pryyomy" class="btn btn-primary">Перейти до прийомів</a>
+        </div>
+        {{else}}
+        <div class="card p-3">
+            <h4 class="text-primary text-center">Авторизація</h4>
+            <form name="login" id="loginForm">
+                <input type="hidden" id="csrfToken" name="_csrf" value="{{csrfToken}}">
+                <div class="form-group">
+                    <label for="username">Логін (e-mail):</label>
+                    <input type="email" class="form-control" id="username" name="username" placeholder="Введіть логін" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Введіть пароль" required>
+                </div>
+                <div id="loginError" class="alert alert-danger d-none py-1 small"></div>
+                <button type="submit" class="btn btn-primary btn-block">Увійти</button>
+            </form>
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<script>
+// Надсилання даних форми авторизації у форматі JSON з CSRF-токеном у заголовку
+document.getElementById('loginForm') && document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/login');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('csrf-token', document.getElementById('csrfToken').value);
+    xhr.onload = function () {
+        if (xhr.status === 200) { location.href = '/pryyomy'; return; }
+        var box = document.getElementById('loginError');
+        box.textContent = xhr.responseText;
+        box.classList.remove('d-none');
+    };
+    xhr.send(JSON.stringify({
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+    }));
+});
+</script>

@@ -1,0 +1,25 @@
+<h1 class="text-primary text-center">Пацієнти</h1>
+<form method="get" action="/patsiyenty" class="form-inline justify-content-center mb-3">
+    <input type="search" class="form-control mr-2" name="q" value="{{q}}" placeholder="Прізвище або телефон">
+    <button type="submit" class="btn btn-primary">Знайти</button>
+</form>
+{{#if isAdmin}}<div class="text-right mb-2"><a href="/patsiyenty/create" class="btn btn-primary btn-sm">Додати пацієнта</a></div>{{/if}}
+<div class="table-responsive">
+<table class="table table-hover table-bordered bg-white">
+    <thead class="table-primary"><tr><th>Код</th><th>ПІБ</th><th>Дата народження</th><th class="text-center">Вік</th><th>Телефон</th><th></th></tr></thead>
+    <tbody>
+    {{#each patsiyenty}}
+        <tr>
+            <td>{{id_patsiyenta}}</td>
+            <td>{{prizvyshche}} {{imya}} {{pobatkovi}}</td>
+            <td>{{date data_narodzhennya}}</td>
+            <td class="text-center">{{vik}}</td>
+            <td>{{telefon}}</td>
+            <td><a href="/patsiyenty/card/{{id_patsiyenta}}" class="btn btn-info btn-sm">Картка</a></td>
+        </tr>
+    {{else}}
+        <tr><td colspan="6" class="text-center text-muted">Пацієнтів не знайдено</td></tr>
+    {{/each}}
+    </tbody>
+</table>
+</div>

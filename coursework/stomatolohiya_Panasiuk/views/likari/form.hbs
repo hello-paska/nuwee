@@ -1,0 +1,26 @@
+<div class="row justify-content-center">
+<div class="col-md-6">
+    <h2 class="text-primary text-center">Лікар<br><small>({{title}})</small></h2>
+    <form method="post" action="{{action}}">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="form-group">
+            <label for="id_viddilennya">Відділення</label>
+            <select class="form-control" id="id_viddilennya" name="id_viddilennya" required>
+                <option value="">— виберіть —</option>
+                {{#each viddilennya}}
+                <option value="{{id_viddilennya}}" {{#if (eq id_viddilennya @root.l.id_viddilennya)}}selected{{/if}}>{{nazva_viddilennya}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4"><label for="prizvyshche">Прізвище</label><input type="text" class="form-control" id="prizvyshche" name="prizvyshche" value="{{l.prizvyshche}}" required></div>
+            <div class="form-group col-md-4"><label for="imya">Ім'я</label><input type="text" class="form-control" id="imya" name="imya" value="{{l.imya}}" required></div>
+            <div class="form-group col-md-4"><label for="pobatkovi">По батькові</label><input type="text" class="form-control" id="pobatkovi" name="pobatkovi" value="{{l.pobatkovi}}"></div>
+        </div>
+        <div class="form-group"><label for="spetsializatsiya">Спеціалізація</label><input type="text" class="form-control" id="spetsializatsiya" name="spetsializatsiya" value="{{l.spetsializatsiya}}"></div>
+        <div class="form-group"><label for="telefon">Телефон</label><input type="tel" class="form-control" id="telefon" name="telefon" value="{{l.telefon}}" placeholder="+380..."></div>
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a href="/likari" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="row justify-content-center">
+<div class="col-md-6">
+    <h2 class="text-primary text-center">Послуга<br><small>({{title}})</small></h2>
+    <form method="post" action="{{action}}">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="form-group">
+            <label for="id_viddilennya">Відділення</label>
+            <select class="form-control" id="id_viddilennya" name="id_viddilennya" required>
+                <option value="">— виберіть —</option>
+                {{#each viddilennya}}
+                <option value="{{id_viddilennya}}" {{#if (eq id_viddilennya @root.s.id_viddilennya)}}selected{{/if}}>{{nazva_viddilennya}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group"><label for="nazva_poslugy">Назва послуги</label><input type="text" class="form-control" id="nazva_poslugy" name="nazva_poslugy" value="{{s.nazva_poslugy}}" required maxlength="150"></div>
+        <div class="form-group"><label for="tsina">Ціна, грн</label><input type="number" class="form-control" id="tsina" name="tsina" value="{{s.tsina}}" min="0" step="0.01" required></div>
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a href="/poslugy" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+</div>

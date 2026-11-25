@@ -1,0 +1,45 @@
+<h1 class="text-primary text-center">Прийоми пацієнтів</h1>
+<form method="get" action="/pryyomy" class="form-inline justify-content-center mb-3">
+    <label class="mr-2" for="vid">з</label>
+    <input type="date" class="form-control mr-2" id="vid" name="vid" value="{{vid}}" required>
+    <label class="mr-2" for="do">по</label>
+    <input type="date" class="form-control mr-2" id="do" name="do" value="{{do}}" required>
+    <select class="form-control mr-2" name="likar" aria-label="Лікар">
+        <option value="">усі лікарі</option>
+        {{#each likari}}
+        <option value="{{id_likarya}}" {{#if (eq id_likarya @root.likar)}}selected{{/if}}>{{nazva}}</option>
+        {{/each}}
+    </select>
+    <button type="submit" class="btn btn-primary">Показати</button>
+</form>
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <div>Знайдено прийомів: <b>{{kilkist}}</b> · сума завершених: <b>{{money suma}} грн</b></div>
+    {{#if isAdmin}}<a href="/pryyomy/create" class="btn btn-primary btn-sm">Записати на прийом</a>{{/if}}
+</div>
+<div class="row">
+{{#each pryyomy}}
+    <div class="col-md-6 col-xl-4">
+        <div class="card status-{{status}}">
+            <div class="card-header d-flex justify-content-between">
+                <span><b>{{date data_pryyomu}}</b>, {{time chas_pryyomu}}</span>
+                <span class="badge {{#if (eq status "завершений")}}badge-success{{else if (eq status "скасований")}}badge-secondary{{else}}badge-primary{{/if}} align-self-center">{{status}}</span>
+            </div>
+            <div class="card-body py-2">
+                <h6 class="card-title mb-1"><a href="/patsiyenty/card/{{id_patsiyenta}}">{{patsiyent}}</a></h6>
+                <p class="mb-1 small">Лікар: <b>{{likar}}</b> ({{nazva_viddilennya}})</p>
+                <p class="mb-1 small">Послуга: {{nazva_poslugy}} — <b>{{money tsina}} грн</b></p>
+                {{#if diahnoz}}<p class="mb-0 small text-muted">Діагноз: {{diahnoz}}</p>{{/if}}
+            </div>
+            <div class="card-footer py-2">
+                {{#if (eq status "завершений")}}<a href="/pryyomy/kvytantsiya/{{id_pryyomu}}" target="_blank" class="btn btn-outline-primary btn-sm">Квитанція</a>{{/if}}
+                {{#if @root.isAdmin}}
+                <a href="/pryyomy/edit/{{id_pryyomu}}" class="btn btn-success btn-sm">Редагувати</a>
+                {{> delete action=(concat "/pryyomy/delete/" id_pryyomu)}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+{{else}}
+    <div class="col-12 text-center text-muted">За вибраний період прийомів не знайдено</div>
+{{/each}}
+</div>
